@@ -3,37 +3,95 @@
 export default function Lights() {
   return (
     <>
-      <ambientLight intensity={0.35} />
-      <hemisphereLight args={["#7dd3fc", "#120819", 1.1]} />
+      {/* Base ambient */}
+      <ambientLight intensity={0.12} color="#0a1520" />
+      <hemisphereLight args={["#0d2035", "#030508", 0.65]} />
+
+      {/* Main shadow-casting sun */}
       <directionalLight
         castShadow
-        intensity={2.2}
-        position={[18, 34, 22]}
-        shadow-camera-bottom={-70}
-        shadow-camera-left={-70}
-        shadow-camera-right={70}
-        shadow-camera-top={70}
-        shadow-mapSize-height={2048}
+        color="#e8f0ff"
+        intensity={1.6}
+        position={[0, 48, 12]}
+        shadow-camera-left={-80}
+        shadow-camera-right={80}
+        shadow-camera-top={80}
+        shadow-camera-bottom={-80}
         shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-bias={-0.0008}
+      />
+
+      {/* 4 stadium spotlights — high corners */}
+      <spotLight
+        position={[-38, 30, -52]}
+        angle={0.52}
+        penumbra={0.45}
+        intensity={240}
+        color="#fff8ee"
+        distance={130}
+        castShadow={false}
       />
       <spotLight
-        angle={0.5}
-        castShadow
-        color="#70e1ff"
-        intensity={75}
-        penumbra={0.65}
-        position={[-30, 25, -46]}
+        position={[38, 30, -52]}
+        angle={0.52}
+        penumbra={0.45}
+        intensity={240}
+        color="#fff8ee"
+        distance={130}
+        castShadow={false}
       />
       <spotLight
-        angle={0.5}
-        castShadow
-        color="#ffb86b"
-        intensity={64}
-        penumbra={0.7}
-        position={[30, 25, 46]}
+        position={[-38, 30, 52]}
+        angle={0.52}
+        penumbra={0.45}
+        intensity={240}
+        color="#fff8ee"
+        distance={130}
+        castShadow={false}
       />
-      <pointLight color="#38bdf8" intensity={70} position={[0, 6, -52]} distance={36} />
-      <pointLight color="#fb923c" intensity={70} position={[0, 6, 52]} distance={36} />
+      <spotLight
+        position={[38, 30, 52]}
+        angle={0.52}
+        penumbra={0.45}
+        intensity={240}
+        color="#fff8ee"
+        distance={130}
+        castShadow={false}
+      />
+
+      {/* 2 mid-field fill lights */}
+      <spotLight
+        position={[0, 28, -26]}
+        angle={0.6}
+        penumbra={0.5}
+        intensity={120}
+        color="#fffbf5"
+        distance={90}
+        castShadow={false}
+      />
+      <spotLight
+        position={[0, 28, 26]}
+        angle={0.6}
+        penumbra={0.5}
+        intensity={120}
+        color="#fffbf5"
+        distance={90}
+        castShadow={false}
+      />
+
+      {/* Blue goal atmosphere */}
+      <pointLight color="#22d3ee" intensity={140} position={[0, 5, -56]} distance={48} decay={2} />
+      <pointLight color="#0ea5e9" intensity={55} position={[-18, 3, -52]} distance={30} decay={2} />
+      <pointLight color="#0ea5e9" intensity={55} position={[18, 3, -52]} distance={30} decay={2} />
+
+      {/* Orange goal atmosphere */}
+      <pointLight color="#f97316" intensity={140} position={[0, 5, 56]} distance={48} decay={2} />
+      <pointLight color="#f97316" intensity={55} position={[-18, 3, 52]} distance={30} decay={2} />
+      <pointLight color="#f97316" intensity={55} position={[18, 3, 52]} distance={30} decay={2} />
+
+      {/* Center pitch fill */}
+      <pointLight color="#7dd3fc" intensity={18} position={[0, 3, 0]} distance={30} decay={2} />
     </>
   );
 }
